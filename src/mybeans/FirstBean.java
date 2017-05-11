@@ -22,6 +22,9 @@ public class FirstBean implements Serializable {
     private int quantitat = 0;
     private boolean ple = false;
     
+    //Propietat Indexada
+    private int[] capacitats = {50,100,150};
+    
     private PropertyChangeSupport propertySupport;
     
     public FirstBean() {
@@ -54,12 +57,28 @@ public class FirstBean implements Serializable {
         this.ple = ple;
     }
     
+    public int[] getCapacitats() {
+        return capacitats;
+    }
+
+    public void setCapacitats(int[] capacitats) {
+        this.capacitats = capacitats;
+    }
+    
+    public int getCapacitats(int index) {
+        return capacitats[index];
+    }
+    
+    public void setCapacitats(int index, int valor) {
+        this.capacitats[index] = valor;
+    }
+    
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertySupport.addPropertyChangeListener(listener);
     }
     
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertySupport.removePropertyChangeListener(listener);
-    }
+    } 
     
 }
