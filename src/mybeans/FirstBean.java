@@ -14,11 +14,15 @@ import java.io.Serializable;
  */
 public class FirstBean implements Serializable {
     
+    //Propietats restringides
     public static final String PROP_SAMPLE_PROPERTY = "sampleProperty";
+    public static final String PROP_QUANTITAT = "quantitat";
     
     //Propietats Lligades
     private String sampleProperty;
     private PropertyChangeSupport propertySupport;
+    
+    private VetoableChangeSupport vetoableSupport;
     
     //Propietats Simples
     private int quantitat = 0;
@@ -29,6 +33,7 @@ public class FirstBean implements Serializable {
     
     public FirstBean() {
         propertySupport = new PropertyChangeSupport(this);
+        vetoableSupport = new VetoableChangeSupport(this);
     }
     
     public String getSampleProperty() {
@@ -45,8 +50,12 @@ public class FirstBean implements Serializable {
         return quantitat;
     }
 
-    public void setQuantitat(int quantitat) {
-        this.quantitat = quantitat;
+    public void setQuantitat(int nouValor) throws PropertyVetoException {
+        int vellValor = quantitat;
+        
+        //Abans de fer el canvi activem els vetadors
+        vetoableSupport.fireVetoableChange(PROP_QUANTITAT, vellValor, nouValor);
+        this.quantitat = nouValor;
     }
 
     public boolean isPle() {
@@ -79,6 +88,14 @@ public class FirstBean implements Serializable {
     
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertySupport.removePropertyChangeListener(listener);
-    } 
+    }
+    
+    public void addVetoableChangeListener(VetoableChangeListener listener) {
+        vetoableSupport.addVetoableChangeListener(listener);
+    }
+
+    public void removeVetoableChangeListener(VetoableChangeListener listener) {
+        vetoableSupport.removeVetoableChangeListener(listener);
+    }   
     
 }
