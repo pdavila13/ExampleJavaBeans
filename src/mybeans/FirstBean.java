@@ -16,7 +16,9 @@ public class FirstBean implements Serializable {
     
     public static final String PROP_SAMPLE_PROPERTY = "sampleProperty";
     
+    //Propietats Lligades
     private String sampleProperty;
+    private PropertyChangeSupport propertySupport;
     
     //Propietats Simples
     private int quantitat = 0;
@@ -24,8 +26,6 @@ public class FirstBean implements Serializable {
     
     //Propietat Indexada
     private int[] capacitats = {50,100,150};
-    
-    private PropertyChangeSupport propertySupport;
     
     public FirstBean() {
         propertySupport = new PropertyChangeSupport(this);
