@@ -18,6 +18,10 @@ public class FirstBean implements Serializable {
     
     private String sampleProperty;
     
+    //Propietats Simples
+    private int quantitat = 0;
+    private boolean ple = false;
+    
     private PropertyChangeSupport propertySupport;
     
     public FirstBean() {
@@ -32,6 +36,22 @@ public class FirstBean implements Serializable {
         String oldValue = sampleProperty;
         sampleProperty = value;
         propertySupport.firePropertyChange(PROP_SAMPLE_PROPERTY, oldValue, sampleProperty);
+    }
+    
+    public int getQuantitat() {
+        return quantitat;
+    }
+
+    public void setQuantitat(int quantitat) {
+        this.quantitat = quantitat;
+    }
+
+    public boolean isPle() {
+        return ple;
+    }
+
+    public void setPle(boolean ple) {
+        this.ple = ple;
     }
     
     public void addPropertyChangeListener(PropertyChangeListener listener) {
